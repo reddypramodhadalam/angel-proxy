@@ -1,0 +1,6 @@
+{
+  "name": "angel-one-proxy",
+  "version": "1.0.0",
+  "description": "CORS proxy for Angel One SmartAPI",
+  "private": true
+}
