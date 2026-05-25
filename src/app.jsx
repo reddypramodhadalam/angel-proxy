@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const WATCHLIST = [
@@ -374,7 +375,7 @@ function JournalTab({ trades, stocks, onClose, onDelete }) {
     <div style={{padding:"48px 20px",textAlign:"center"}}>
       <div style={{fontSize:"52px",marginBottom:"14px"}}>📓</div>
       <div style={{color:"#8b949e",fontWeight:"800",fontSize:"15px",marginBottom:"10px"}}>Journal is Empty</div>
-      <div style={{color:"#5a6370",fontSize:"11px",lineHeight:"2"}}>Go to <span style={{color:"#ff6b35"}}>Market tab</span> → spot a signal → tap <b style={{color:"#e8eaf0"}}>BUY / SELL</b> → confirm → <span style={{color:"#00e676"}}>auto-saved here!</span></div>
+      <div style={{color:"#5a6370",fontSize:"11px",lineHeight:"2"}}>Go to <span style={{color:"#ff6b35"}}>Market tab</span> → spot a signal → tap <b style={{color:"#e8eaf0"}}>BUY / SELL</b> ��� confirm → <span style={{color:"#00e676"}}>auto-saved here!</span></div>
     </div>
   );
 
@@ -719,6 +720,16 @@ function Dashboard({ session, onLogout }) {
 
 export default function App() {
   const [session,setSession]=useState(null);
-  if(!session) return <LoginScreen onConnect={setSession}/>;
-  return <Dashboard session={session} onLogout={()=>setSession(null)}/>;
+  if(!session) return (
+    <>
+      <LoginScreen onConnect={setSession}/>
+      <Analytics />
+    </>
+  );
+  return (
+    <>
+      <Dashboard session={session} onLogout={()=>setSession(null)}/>
+      <Analytics />
+    </>
+  );
 }
